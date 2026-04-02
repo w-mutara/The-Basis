@@ -1,6 +1,7 @@
 # The-Basis
 A trading strategy leveraging the difference between spot and futures prices (basis) for signal generation, trend confirmation and breakout detection. The nasdaq 100 futures and spot price are used for back-testing but can work across other futures symbols.
-<img width="1181" height="855" alt="image" src="https://github.com/user-attachments/assets/37e3fe15-acf9-4738-a941-4296f6ff3995" />
+
+[Watch recording](https://github.com/user-attachments/assets/fdeadfc8-8f3a-414a-937c-3b90a317528b)
 
 # Overview:
 This script analyzes the relationship between Nasdaq futures (NQ) and the Nasdaq index (NDX) using: 
@@ -31,14 +32,11 @@ Traders have multiple options to view:
 - Price Candles etc...
 
 # Screenshots and Videos
+<img width="1181" height="855" alt="image" src="https://github.com/user-attachments/assets/37e3fe15-acf9-4738-a941-4296f6ff3995" />
 <img width="1294" height="943" alt="image" src="https://github.com/user-attachments/assets/55f4f3fb-bba6-4215-b66d-f665a7b5e727" />
 <img width="1292" height="936" alt="image" src="https://github.com/user-attachments/assets/552c4c2d-efd1-4ca5-8709-23cc361a4fdc" />
 <img width="1289" height="941" alt="image" src="https://github.com/user-attachments/assets/ed286fa0-2fcf-4aa7-82f0-f67efae3a675" />
 <img width="1297" height="943" alt="image" src="https://github.com/user-attachments/assets/2dcc915a-1fc6-4456-9d04-ae63cc2436e6" />
-
-
-
-https://github.com/user-attachments/assets/fdeadfc8-8f3a-414a-937c-3b90a317528b
 
 
 
