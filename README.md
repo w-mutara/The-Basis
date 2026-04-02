@@ -9,28 +9,19 @@ It is used as a baseline for signal generation. The core idea is to use the max 
 
 When observed over multiple days, price tends to continue in the direction of the breakout and confirms the bias for the day. The equlibrium point is the mid line between the daily high and daily low where traders can place there intial stop loss once price breaks out on either side. Once the trend is confirmed, the trader may trail the stop loss and profit as price expands to the upside or the downside.
 
---
-STRUCTURE:
+# STRUCTURE:
 - Price > Basis High → Expansion up
 - Price < Basis Low  → Expansion down
 - The Basis Mid  → Equilibrium
 
-------------------------------------------------------------------------------
-TRADING IDEA:
+# TRADING IDEA:
 - LONG: Price above Basis High
 - SHORT: Price below Basis Low
 - STOP: Mid line (dynamic)
 
-The (MAX) Basis High and MIN Basis (Low), act as distance from the daily open
-according to the basis where if price breaks or below those levels, it is likely to continue in that direction
-for the reminder of the day. The mid line provides a dynamic stop and chop zone fiter where if price hovers within 
-that area, traders should be expect the price to break out in either way. It cautions to saty away.
+The (MAX) Basis High and MIN Basis (Low), act as distance from the daily open according to the basis where if price breaks or below those levels, it is likely to continue in that direction for the reminder of the day. The mid line provides a dynamic stop and chop zone fiter where if price hovers within that area, traders should be expect the price to break out in either way. It cautions to saty away.
 
-NOTE:
-With Supervison and experienced trader insight, i believe this script has potential to be very profitable.
-The difficulty commes in trailing profits and not to give back to the market too much incase price returns to MIN LOW 
-or MAX HIGH but doesn't invalidate the trade and resumes its original direction. Pratice makes perfect in this area and can serve
-as a building block to automate and be hands free on this strategy.
+With Supervison and experienced trader insight, i believe this script has potential to be very profitable. The difficulty comes in trailing profits and not to give back to the market too much incase price returns to MIN LOW or MAX HIGH but doesn't invalidate the trade and resumes its original direction. Pratice makes perfect in this area and can serve as a building block to automate and be hands free on this strategy.
 
 Traders have multiple options to view:
 - Basis vwap
