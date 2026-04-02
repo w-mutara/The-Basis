@@ -1,0 +1,226 @@
+// This Pine Script® code is subject to the terms of the Mozilla Public License 2.0
+// © 2026 Tugume William Mutara
+
+//@version=6
+indicator(title = 'The Basis - Futures', shorttitle = 'The Basis', overlay = false, max_labels_count = 500)
+
+// ==============================================================================
+// SCRIPT: THE BASIS - THE ATTEMPT AND IDEA
+// ==============================================================================
+
+// OVERVIEW:
+// This script analyzes the relationship between Nasdaq futures (NQ)
+// and the Nasdaq index (NDX) using:
+
+// BASIS = NQ - NDX
+
+// Price is transformed into "basis scale" to observe:
+// Expansion (momentum)
+// Equilibrium (mean reversion)
+
+// ------------------------------------------------------------------------------
+// STRUCTURE:
+
+// Price > Basis High → Expansion up
+// Price < Basis Low  → Expansion down
+// The Basis Mid  → Equilibrium
+
+// ------------------------------------------------------------------------------
+// TRADING IDEA:
+
+// LONG:
+//   • Price above Basis High
+
+// SHORT:
+//   • Price below Basis Low
+
+// STOP:
+//   • Mid line (dynamic)
+
+// Additionally, the (MAX) Basis High and MIN Basis (Low), act as distance from the daily open
+// according to the basis where if price breaks or below those levels, it is likely to continue in that direction
+// for the reminder of the day. The mid line provides a dynamic stop and chop zone fiter where if price hovers within 
+// that area, traders should be expect the price to break out in either way. It cautions to saty away.
+
+// NOTE:
+// With Supervison and experienced trader insight, i believe this script has potential to be very profitable.
+// The difficulty commes in trailing profits and not to give back to the market too much incase price returns to MIN LOW 
+// or MAX HIGH but doesn't invalidate the trade and resumes its original direction. Pratice makes perfect in this area and can serve
+// as a building block to automate and be hands free on this strategy.
+
+// Traders have multiple options to view:
+// - Basis vwap
+// - Basis mean
+// - Basis Candles
+// - Price Candles etc...
+// ==============================================================================
+
+// INPUTS
+show_basis_candles = input.bool(defval = true, title = 'Show Basis Candles')
+show_nq_candles = input.bool(defval = true, title = 'Show NQ (Basis Space) Candles')
+show_mean = input.bool(defval = true, title = 'Show Basis Mean')
+show_vwap = input.bool(defval = true, title = 'Show Basis VWAP')
+show_mid = input.bool(defval = true, title = 'Show Basis Mid Line')
+
+show_basis_open = input.bool(defval = false, title = 'Plot Basis Open Line')
+show_basis_high = input.bool(defval = false, title = 'Plot Basis High Line')
+show_basis_low = input.bool(defval = false, title = 'Plot Basis Low Line')
+show_basis_close = input.bool(defval = false, title = 'Plot Basis Close Line')
+
+// MARKET DATA
+nq_o = open
+nq_h = high
+nq_l = low
+nq_c = close
+
+[ndx_o, ndx_h, ndx_l, ndx_c] = request.security(symbol = 'NASDAQ:NDX', timeframe = timeframe.period, expression = [open, high, low, close])
+
+// BASIS CALCULATION
+newPeriod = ta.change(time('D')) != 0
+
+basis_c = nq_c - ndx_c
+basis_o = newPeriod ? nq_o - ndx_o : basis_c[1]
+
+basis_h = nq_h - ndx_h
+basis_l = nq_l - ndx_l
+
+// MEAN
+var float sum_a = 0.0
+var float count = 0.0
+
+if newPeriod
+    sum_a := basis_c
+    count := 1.0
+    count
+else
+    sum_a := sum_a + basis_c
+    count := count + 1.0
+    count
+
+mean_a = sum_a / count
+
+// VWAP
+var float vwap_num = 0.0
+var float vwap_den = 0.0
+
+if newPeriod
+    vwap_num := basis_c * volume
+    vwap_den := volume
+    vwap_den
+else
+    vwap_num := vwap_num + basis_c * volume
+    vwap_den := vwap_den + volume
+    vwap_den
+
+basis_vwap = vwap_den != 0 ? vwap_num / vwap_den : na
+
+// INTRADAY STRUCTURE
+var float basis_day_high = na
+var float basis_day_low = na
+
+var line high_line = na
+var line low_line = na
+var line mid_line = na
+
+var int session_start = na
+
+if newPeriod
+    basis_day_high := basis_h
+    basis_day_low := basis_l
+    session_start := bar_index
+
+    high_line := line.new(x1 = session_start, y1 = basis_day_high, x2 = bar_index, y2 = basis_day_high, color = color.blue, width = 2)
+
+    low_line := line.new(x1 = session_start, y1 = basis_day_low, x2 = bar_index, y2 = basis_day_low, color = color.orange, width = 2)
+
+    mid_val = (basis_day_high + basis_day_low) / 2.0
+
+    mid_line := line.new(x1 = session_start, y1 = mid_val, x2 = bar_index, y2 = mid_val, color = color.purple, width = 2)
+    mid_line
+
+else
+    new_high = basis_h > basis_day_high
+    new_low = basis_l < basis_day_low
+
+    if new_high
+        basis_day_high := basis_h
+        basis_day_high
+
+    if new_low
+        basis_day_low := basis_l
+        basis_day_low
+
+    if new_high
+        line.set_y1(id = high_line, y = basis_day_high)
+        line.set_y2(id = high_line, y = basis_day_high)
+
+    if new_low
+        line.set_y1(id = low_line, y = basis_day_low)
+        line.set_y2(id = low_line, y = basis_day_low)
+
+    if new_high or new_low
+        mid_val = (basis_day_high + basis_day_low) / 2.0
+        line.set_y1(id = mid_line, y = mid_val)
+        line.set_y2(id = mid_line, y = mid_val)
+
+if not na(high_line)
+    line.set_x2(id = high_line, x = bar_index)
+
+if not na(low_line)
+    line.set_x2(id = low_line, x = bar_index)
+
+if not na(mid_line)
+    line.set_x2(id = mid_line, x = bar_index)
+
+// PLOTS
+plot(series = show_mean ? mean_a : na, title = 'Basis Mean', color = color.gray, linewidth = 2)
+plot(series = show_vwap ? basis_vwap : na, title = 'Basis VWAP', color = color.white, linewidth = 2)
+
+plot(series = show_basis_open ? basis_o : na, title = 'Basis Open', color = color.yellow)
+plot(series = show_basis_high ? basis_h : na, title = 'Basis High', color = color.green)
+plot(series = show_basis_low ? basis_l : na, title = 'Basis Low', color = color.red)
+plot(series = show_basis_close ? basis_c : na, title = 'Basis Close', color = color.blue)
+
+// BASIS CANDLES
+basis_color = basis_c > basis_c[1] ? color.blue : color.orange
+
+plotcandle(open = show_basis_candles ? basis_o : na, high = show_basis_candles ? basis_h : na, low = show_basis_candles ? basis_l : na, close = show_basis_candles ? basis_c : na, title = 'Basis Candles', color = basis_color, wickcolor = basis_color, bordercolor = basis_color)
+
+// NQ IN BASIS SPACE (HOLLOW)
+up_move = nq_h - nq_o
+down_move = nq_l - nq_o
+close_move = nq_c - nq_o
+
+var float basis_open = na
+var float syn_open = na
+var float syn_high = na
+var float syn_low = na
+var float syn_close = na
+
+if newPeriod
+    basis_open := basis_o
+    syn_open := basis_open
+    syn_high := syn_open + up_move
+    syn_low := syn_open + down_move
+    syn_close := syn_open + close_move
+    syn_close
+else
+    syn_open := syn_close[1]
+    syn_high := syn_open + up_move
+    syn_low := syn_open + down_move
+    syn_close := syn_open + close_move
+    syn_close
+
+is_bull = syn_close > syn_open
+
+plotcandle(open = show_nq_candles ? syn_open : na, high = show_nq_candles ? syn_high : na, low = show_nq_candles ? syn_low : na, close = show_nq_candles ? syn_close : na, title = 'NQ (Basis Space)', color = na, wickcolor = is_bull ? color.green : color.red, bordercolor = is_bull ? color.green : color.red)
+
+// SIGNAL LABELS
+long_signal = ta.crossover(syn_close, basis_day_high)
+short_signal = ta.crossunder(syn_close, basis_day_low)
+
+if long_signal
+    label.new(x = bar_index, y = syn_low, text = 'L', style = label.style_label_up, color = color.green, textcolor = color.white, size = size.small)
+
+if short_signal
+    label.new(x = bar_index, y = syn_high, text = 'S', style = label.style_label_down, color = color.red, textcolor = color.white, size = size.small)
