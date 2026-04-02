@@ -1,19 +1,10 @@
 # The-Basis
-A trading strategy leveraging the difference between spot and futures prices (basis), signal generation, trend confirmation and breakout detection.
-
-==============================================================================
-SCRIPT: THE BASIS - THE ATTEMPT AND IDEA
-==============================================================================
+A trading strategy leveraging the difference between spot and futures prices (basis) for signal generation, trend confirmation and breakout detection.
 
 OVERVIEW:
-This script analyzes the relationship between Nasdaq futures (NQ)
-and the Nasdaq index (NDX) using:
+This script analyzes the relationship between Nasdaq futures (NQ) and the Nasdaq index (NDX) using: BASIS = NQ - NDX
 
-BASIS = NQ - NDX
-
-Price is transformed into "basis scale" to observe:
-Expansion (momentum)
-Equilibrium (mean reversion)
+Price is transformed into "basis scale" to observe: Expansion (momentum), Equilibrium (mean reversion)
 
 ------------------------------------------------------------------------------
 STRUCTURE:
@@ -33,8 +24,9 @@ SHORT:
 
 STOP:
   • Mid line (dynamic)
+------------------------------------------------------------------------------
 
-Additionally, the (MAX) Basis High and MIN Basis (Low), act as distance from the daily open
+The (MAX) Basis High and MIN Basis (Low), act as distance from the daily open
 according to the basis where if price breaks or below those levels, it is likely to continue in that direction
 for the reminder of the day. The mid line provides a dynamic stop and chop zone fiter where if price hovers within 
 that area, traders should be expect the price to break out in either way. It cautions to saty away.
