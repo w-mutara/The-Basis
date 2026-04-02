@@ -28,3 +28,5 @@ Traders have multiple options to view:
 - Basis mean
 - Basis Candles
 - Price Candles etc...
+
+# Screenshots and Videos
