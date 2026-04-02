@@ -1,7 +1,9 @@
 # The-Basis
 A trading strategy leveraging the difference between spot and futures prices (basis) for signal generation, trend confirmation and breakout detection.
 
+-----------------------------------------------------------------------------
 OVERVIEW:
+
 This script analyzes the relationship between Nasdaq futures (NQ) and the Nasdaq index (NDX) using: BASIS = NQ - NDX
 
 Price is transformed into "basis scale" to observe: Expansion (momentum), Equilibrium (mean reversion)
