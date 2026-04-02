@@ -8,10 +8,9 @@ Price is transformed into "basis scale" to observe: Expansion (momentum), Equili
 
 ------------------------------------------------------------------------------
 STRUCTURE:
-
-1. Price > Basis High → Expansion up
-2. Price < Basis Low  → Expansion down
-3. The Basis Mid  → Equilibrium
+- Price > Basis High → Expansion up
+- Price < Basis Low  → Expansion down
+- The Basis Mid  → Equilibrium
 
 ------------------------------------------------------------------------------
 TRADING IDEA:
