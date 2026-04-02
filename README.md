@@ -5,7 +5,9 @@ A trading strategy leveraging the difference between spot and futures prices (ba
 This script analyzes the relationship between Nasdaq futures (NQ) and the Nasdaq index (NDX) using: 
 - BASIS = NQ - NDX
 
-Price is transformed into "basis scale" to observe: Expansion (momentum), Equilibrium (mean reversion)
+The is used as a baseline for signal generation. The core idea is to use the max and min daily basis as entry routes for buying or selling in the market. When price breaks above the daily high, the trader can look to enter long or enter short when the prices breaks down below the daily low.
+
+When observed over multiple days, price tends continue in the direction of the breakout and confirms the bias for the day. The equlibrium point is the mid line between the daily high n  daily low where traders can place there intial stop loss once price breaks out on either side. One the trend is confirmed, the trader may trail the stop loss and profit as price expands to the upsude or the downside.
 
 ------------------------------------------------------------------------------
 STRUCTURE:
