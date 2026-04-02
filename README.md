@@ -30,3 +30,5 @@ Traders have multiple options to view:
 - Price Candles etc...
 
 # Screenshots and Videos
+<img width="1181" height="855" alt="image" src="https://github.com/user-attachments/assets/37e3fe15-acf9-4738-a941-4296f6ff3995" />
+
