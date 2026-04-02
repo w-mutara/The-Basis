@@ -35,11 +35,7 @@ Traders have multiple options to view:
 <img width="1292" height="936" alt="image" src="https://github.com/user-attachments/assets/552c4c2d-efd1-4ca5-8709-23cc361a4fdc" />
 <img width="1289" height="941" alt="image" src="https://github.com/user-attachments/assets/ed286fa0-2fcf-4aa7-82f0-f67efae3a675" />
 <img width="1297" height="943" alt="image" src="https://github.com/user-attachments/assets/2dcc915a-1fc6-4456-9d04-ae63cc2436e6" />
-<img width="11
-
-https://github.com/user-attachments/assets/3777ba4c-8b5a-437d-b970-46bf7ff20ae7
-
-79" height="889" alt="image" src="https://github.com/user-attachments/assets/faf69c15-ca81-4272-8e27-18cce26a02c1" />
+<img width="11https://github.com/user-attachments/assets/3777ba4c-8b5a-437d-b970-46bf7ff20ae779" height="889" alt="image" src="https://github.com/user-attachments/assets/faf69c15-ca81-4272-8e27-18cce26a02c1" />
 
 
 
