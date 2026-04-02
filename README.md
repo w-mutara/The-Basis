@@ -14,12 +14,9 @@ STRUCTURE:
 
 ------------------------------------------------------------------------------
 TRADING IDEA:
-
-1. LONG: Price above Basis High
-
-2. SHORT: Price below Basis Low
-
-3. STOP: Mid line (dynamic)
+- LONG: Price above Basis High
+- SHORT: Price below Basis Low
+- STOP: Mid line (dynamic)
 
 The (MAX) Basis High and MIN Basis (Low), act as distance from the daily open
 according to the basis where if price breaks or below those levels, it is likely to continue in that direction
